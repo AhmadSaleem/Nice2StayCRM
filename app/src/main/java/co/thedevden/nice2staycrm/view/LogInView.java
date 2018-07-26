@@ -1,21 +1,27 @@
 package co.thedevden.nice2staycrm.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import co.thedevden.nice2staycrm.MainActivity;
 import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.connector.LoginPresenterToView;
 import co.thedevden.nice2staycrm.connector.LoginToPresenter;
+import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
 import co.thedevden.nice2staycrm.presenter.LogInPresenter;
 
 public class LogInView extends AppCompatActivity implements LoginPresenterToView {
 
     EditText userName,password;
+    ProgressBar progressBar;
+    boolean loggedIn;
 
     LoginToPresenter logInPresenter;
     @Override
@@ -26,6 +32,7 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
         userName = (EditText) findViewById(R.id.editText);
         password = (EditText) findViewById(R.id.editText2);
+        progressBar = (ProgressBar) findViewById(R.id.loginProgressBar);
         logInPresenter = new LogInPresenter(this,this);
 
     }
@@ -33,6 +40,7 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
     public void signInOnClick(View view) {
         String user,pass;
 
+        progressBar.setVisibility(View.VISIBLE);
 
         user = userName.getText().toString();
         pass = password.getText().toString();
@@ -48,13 +56,16 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
     }
 
     @Override
-    public void userNameError() { userName.setError("Please Enter Username");}
+    public void userNameError() { progressBar.setVisibility(View.GONE);
+    userName.setError("Please Enter Username");}
 
     @Override
-    public void passwordError() { password.setError("Please Enter Password"); }
+    public void passwordError() { progressBar.setVisibility(View.GONE);
+    password.setError("Please Enter Password"); }
 
     @Override
     public void loginSuccess(boolean message) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "Login Successfull", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LogInView.this,MainActivity.class);
         startActivity(intent);
@@ -63,12 +74,46 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
     @Override
     public void loginError(String message) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+
     }
 
     public void signUpContinue(View view) {
        Intent intent = new Intent(LogInView.this,SignUpView.class);
        startActivity(intent);
        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        loggedIn  = SharedPreferencesUtils.getInstance(this).getBoolanValue("istoken",false);
+
+//        Intent service = new Intent(Login.this,Refresh.class);
+
+        if(loggedIn){
+
+            Toast.makeText(this, "You are already logged In", Toast.LENGTH_SHORT).show();
+
+            //startService(service);
+
+            progressBar.setVisibility(View.GONE);
+
+//            Intent intent = new Intent(Login.this,MainActivity.class);
+//            startActivity(intent);
+
+        }
+        else
+        {
+            progressBar.setVisibility(View.GONE);
+            //stopService(service);
+        }
+
+
     }
 }

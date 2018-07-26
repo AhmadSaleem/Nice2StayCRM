@@ -1,5 +1,6 @@
 package co.thedevden.nice2staycrm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
+import co.thedevden.nice2staycrm.view.ProfileView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView navpersonName,navEmail;
+    private String token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +33,26 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        NavigationView navigationViewTitles = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationViewTitles.getHeaderView(0);
+        navpersonName = (TextView) headerView.findViewById(R.id.personName);
+        navEmail = (TextView) headerView.findViewById(R.id.personEmail);
+
+
+        navpersonName.setText(SharedPreferencesUtils.getInstance(this).getStringValue("name",null)+" " + SharedPreferencesUtils.getInstance(this).getStringValue("surname",null));
+        navEmail.setText(SharedPreferencesUtils.getInstance(this).getStringValue("personEmail",null));
+
+        CircleImageView circleImage = (CircleImageView) headerView.findViewById(R.id.profile);
+
+        circleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ProfileView.class);
+                startActivity(intent);
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +69,14 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public  void showProfile(View view)
+    {
+
     }
 
     @Override
@@ -98,4 +135,14 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        token = SharedPreferencesUtils.getInstance(this).getStringValue("token",null);
+
+        navpersonName.setText(SharedPreferencesUtils.getInstance(this).getStringValue("name",null)+" " + SharedPreferencesUtils.getInstance(this).getStringValue("surname",null));
+        navEmail.setText(SharedPreferencesUtils.getInstance(this).getStringValue("personEmail",null));
+    }
+
 }
