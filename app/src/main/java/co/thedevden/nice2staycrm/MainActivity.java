@@ -17,6 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
+import co.thedevden.nice2staycrm.service.RefreshToken;
+import co.thedevden.nice2staycrm.view.AccomodationsView;
+import co.thedevden.nice2staycrm.view.LogInView;
 import co.thedevden.nice2staycrm.view.ProfileView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     TextView navpersonName,navEmail;
     private String token;
+    boolean istoken;
 
 
     @Override
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     public  void showProfile(View view)
@@ -117,17 +123,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_logout) {
 
-        } else if (id == R.id.nav_slideshow) {
+            SharedPreferencesUtils.getInstance(this).removeKey("token");
+            SharedPreferencesUtils.getInstance(this).removeKey("istoken");
 
-        } else if (id == R.id.nav_manage) {
+            istoken=false;
 
-        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent service = new Intent(MainActivity.this,RefreshToken.class);
+            stopService(service);
+
+            Intent intent = new Intent(MainActivity.this,LogInView.class);
+            startActivity(intent);
+            finish();
 
         }
 
@@ -145,4 +154,11 @@ public class MainActivity extends AppCompatActivity
         navEmail.setText(SharedPreferencesUtils.getInstance(this).getStringValue("personEmail",null));
     }
 
+
+    public void showAccomodations(View view) {
+
+        Intent intent = new Intent(MainActivity.this, AccomodationsView.class);
+        startActivity(intent);
+
+    }
 }

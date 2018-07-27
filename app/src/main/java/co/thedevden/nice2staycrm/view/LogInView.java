@@ -16,6 +16,7 @@ import co.thedevden.nice2staycrm.connector.LoginPresenterToView;
 import co.thedevden.nice2staycrm.connector.LoginToPresenter;
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
 import co.thedevden.nice2staycrm.presenter.LogInPresenter;
+import co.thedevden.nice2staycrm.service.RefreshToken;
 
 public class LogInView extends AppCompatActivity implements LoginPresenterToView {
 
@@ -66,6 +67,10 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
     @Override
     public void loginSuccess(boolean message) {
         progressBar.setVisibility(View.GONE);
+
+        Intent service = new Intent(LogInView.this,RefreshToken.class);
+        startService(service);
+
         Toast.makeText(this, "Login Successfull", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LogInView.this,MainActivity.class);
         startActivity(intent);
@@ -94,24 +99,24 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
         loggedIn  = SharedPreferencesUtils.getInstance(this).getBoolanValue("istoken",false);
 
-//        Intent service = new Intent(Login.this,Refresh.class);
+        Intent service = new Intent(LogInView.this,RefreshToken.class);
 
         if(loggedIn){
 
             Toast.makeText(this, "You are already logged In", Toast.LENGTH_SHORT).show();
 
-            //startService(service);
+            startService(service);
 
             progressBar.setVisibility(View.GONE);
 
-//            Intent intent = new Intent(Login.this,MainActivity.class);
-//            startActivity(intent);
+           Intent intent = new Intent(LogInView.this,MainActivity.class);
+           startActivity(intent);
 
         }
         else
         {
             progressBar.setVisibility(View.GONE);
-            //stopService(service);
+            stopService(service);
         }
 
 

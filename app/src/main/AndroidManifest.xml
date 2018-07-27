@@ -17,20 +17,41 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.LogInView"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".view.SignUpView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.ProfileView" />
+
+        <service
+            android:name=".service.RefreshToken"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.AccomodationItemView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AccomodationsView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AddAccomodationView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".splashscreen.SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".view.SignUpView"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.ProfileView"></activity>
     </application>
 
 </manifest>

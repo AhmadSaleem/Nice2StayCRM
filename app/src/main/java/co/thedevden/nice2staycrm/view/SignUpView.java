@@ -16,6 +16,7 @@ import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.connector.SignUpPresenterToView;
 import co.thedevden.nice2staycrm.connector.SignUpToPresenter;
 import co.thedevden.nice2staycrm.presenter.SignUpPresenter;
+import co.thedevden.nice2staycrm.service.RefreshToken;
 
 public class SignUpView extends AppCompatActivity implements SignUpPresenterToView {
 
@@ -110,6 +111,10 @@ public class SignUpView extends AppCompatActivity implements SignUpPresenterToVi
 
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "SignUp Sucessfull", Toast.LENGTH_SHORT).show();
+
+        Intent service = new Intent(SignUpView.this,RefreshToken.class);
+        startService(service);
+
         Intent intent = new Intent(SignUpView.this, MainActivity.class);
         startActivity(intent);
         finish();
