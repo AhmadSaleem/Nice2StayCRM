@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     >
 
 
@@ -30,8 +31,9 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
+                android:weightSum="1"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE"
+                android:background="#fff"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,58 +41,34 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/Name_accomodation"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.33">
+                    android:layout_height="wrap_content"
+                    android:text="Accomodation Name Here"
+                    android:layout_weight="0.5"
+                    android:textColor="#000"
+                    android:textSize="20dp"/>
 
-                    <TextView
-                        android:id="@+id/Name_accomodation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="Name:Accomodation Name"
-                        android:textColor="#000"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/country_accomodation"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.33"
-                    android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:id="@+id/country_accomodation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="Country:Pakistan"
-                        android:textColor="#000" />
+                    android:layout_height="wrap_content"
+                    android:text="Pakistan"
+                    android:layout_weight="0.25"
+                    android:textColor="#8C8B8B"
+                    android:textSize="14dp"/>
 
 
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/type_accomodation"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.33">
-
-                    <TextView
-                        android:id="@+id/type_accomodation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="Type:boutique"
-                        android:textColor="#000" />
-
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Apartment"
+                    android:layout_weight="0.25"
+                    android:textColor="#8C8B8B"
+                    android:textSize="12dp"/>
 
 
             </LinearLayout>

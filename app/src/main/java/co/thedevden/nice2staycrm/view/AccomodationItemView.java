@@ -1,7 +1,12 @@
 package co.thedevden.nice2staycrm.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +14,7 @@ import android.widget.TextView;
 
 import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
+import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
 public class AccomodationItemView extends AppCompatActivity {
 
@@ -17,12 +23,17 @@ public class AccomodationItemView extends AppCompatActivity {
     boolean listed_To;
     int id;
 
+    AlertDialog.Builder builder;
+    BroadcastReceiver broadcastReceiver;
+    View view,view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accomodation_item);
 
+        view = getLayoutInflater().inflate(R.layout.activity_accomodation_item,null);
+        view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
+        setContentView(view);
 
         id = getIntent().getExtras().getInt("accomo_Id");
         name = getIntent().getExtras().getString("accomo_Name");
@@ -31,6 +42,8 @@ public class AccomodationItemView extends AppCompatActivity {
         region  = getIntent().getExtras().getString("accomo_Region");
         listed_To   = getIntent().getExtras().getBoolean("accomo_Listed_To");
         persons  = getIntent().getExtras().getInt("accomo_PersonNo");
+
+        builder = new AlertDialog.Builder(this);
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.CollapsingToolBarLayout);
         collapsingToolbarLayout.setTitleEnabled(true);
@@ -53,6 +66,63 @@ public class AccomodationItemView extends AppCompatActivity {
 
         collapsingToolbarLayout.setTitle(name);
 
+    }
+
+    public void checkInternet()
+    {
+        IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(ConnectivityReceiver.isConnected(getApplicationContext()))
+                {
+                    setContentView(view);
+                    return;
+
+                }
+                else
+                {
+                    setContentView(view2);
+                    alertConection();
+                }
+            }
+        };
+
+        registerReceiver(broadcastReceiver,intentFilter);
+
+    }
+
+    @Override
+    protected void onResume() {
+        checkInternet();
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(broadcastReceiver);
+        super.onStop();
+    }
+
+    private void alertConection()
+    {
+
+        builder.setTitle("No Internet Connection!");
+        builder.setMessage("Sorry! no Internet connectivety detected. Please Reconnect and try again.");
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                boolean isConnected = ConnectivityReceiver.isConnected(getApplicationContext());
+                if(!isConnected)
+                    alertConection();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void updateAccomodation(View view) {

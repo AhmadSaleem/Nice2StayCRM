@@ -1,8 +1,11 @@
 package co.thedevden.nice2staycrm.view;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,18 +20,27 @@ import co.thedevden.nice2staycrm.connector.LoginToPresenter;
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
 import co.thedevden.nice2staycrm.presenter.LogInPresenter;
 import co.thedevden.nice2staycrm.service.RefreshToken;
+import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
 public class LogInView extends AppCompatActivity implements LoginPresenterToView {
 
     EditText userName,password;
     ProgressBar progressBar;
     boolean loggedIn;
-
+    AlertDialog.Builder builder;
+    private BroadcastReceiver broadcastReceiver;
     LoginToPresenter logInPresenter;
+    View view,view2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+
+        view = getLayoutInflater().inflate(R.layout.activity_log_in,null);
+        view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
+
+        setContentView(view);
+
+        builder = new AlertDialog.Builder(this);
 
 
         userName = (EditText) findViewById(R.id.editText);
@@ -36,6 +48,39 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
         progressBar = (ProgressBar) findViewById(R.id.loginProgressBar);
         logInPresenter = new LogInPresenter(this,this);
 
+
+    }
+
+    public void checkInternet()
+    {
+        IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(ConnectivityReceiver.isConnected(getApplicationContext()))
+                {
+                    setContentView(view);
+                    return;
+                }
+                else
+                {
+                    setContentView(view2);
+                    alertConection();
+                }
+            }
+        };
+
+        registerReceiver(broadcastReceiver,intentFilter);
+
+    }
+
+
+    @Override
+    protected void onStop() {
+
+        unregisterReceiver(broadcastReceiver);
+        super.onStop();
     }
 
     public void signInOnClick(View view) {
@@ -58,7 +103,7 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
     @Override
     public void userNameError() { progressBar.setVisibility(View.GONE);
-    userName.setError("Please Enter Username");}
+    userName.setError("Please Enter Valid Mail");}
 
     @Override
     public void passwordError() { progressBar.setVisibility(View.GONE);
@@ -95,6 +140,9 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
     protected void onResume() {
         super.onResume();
 
+        checkInternet();
+
+
         progressBar.setVisibility(View.VISIBLE);
 
         loggedIn  = SharedPreferencesUtils.getInstance(this).getBoolanValue("istoken",false);
@@ -111,6 +159,7 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
            Intent intent = new Intent(LogInView.this,MainActivity.class);
            startActivity(intent);
+           finish();
 
         }
         else
@@ -121,4 +170,24 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
 
     }
+    private void alertConection()
+    {
+
+        builder.setTitle("No Internet Connection!");
+        builder.setMessage("Sorry! no Internet connectivety detected. Please Reconnect and try again.");
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                boolean isConnected = ConnectivityReceiver.isConnected(getApplicationContext());
+                if(!isConnected)
+                    alertConection();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

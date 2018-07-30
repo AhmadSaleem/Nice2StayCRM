@@ -1,13 +1,19 @@
 package co.thedevden.nice2staycrm.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -17,20 +23,29 @@ import co.thedevden.nice2staycrm.connector.SignUpPresenterToView;
 import co.thedevden.nice2staycrm.connector.SignUpToPresenter;
 import co.thedevden.nice2staycrm.presenter.SignUpPresenter;
 import co.thedevden.nice2staycrm.service.RefreshToken;
+import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
 public class SignUpView extends AppCompatActivity implements SignUpPresenterToView {
 
     EditText firstname_Edt_Txt,lastname_Edt_Txt,bussName_Edt_Txt,
             email_Edt_Txt,pass_Edt_Txt,cnfrmpass_Edt_Txt;
-    Button signUp;
+
     ProgressBar progressBar;
+    AlertDialog.Builder builder;
+    BroadcastReceiver broadcastReceiver;
 
     SignUpToPresenter presenter;
+
+    View view,view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+
+        view = getLayoutInflater().inflate(R.layout.activity_sign_up,null);
+        view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
+        setContentView(view);
+
 
         firstname_Edt_Txt = (EditText) findViewById(R.id.editText3);
         lastname_Edt_Txt = (EditText) findViewById(R.id.editText4);
@@ -40,9 +55,68 @@ public class SignUpView extends AppCompatActivity implements SignUpPresenterToVi
         cnfrmpass_Edt_Txt = (EditText) findViewById(R.id.editText8);
         progressBar = (ProgressBar) findViewById(R.id.progressBarSignUp);
 
+        builder = new AlertDialog.Builder(this);
         presenter = new SignUpPresenter(this,this);
 
     }
+
+    @Override
+    protected void onResume() {
+        checkInternet();
+        super.onResume();
+    }
+
+    public void checkInternet()
+    {
+        IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(ConnectivityReceiver.isConnected(getApplicationContext()))
+                {
+                    setContentView(view);
+                    return;
+
+                }
+                else
+                {
+                    setContentView(view2);
+                    alertConection();
+                }
+            }
+        };
+
+        registerReceiver(broadcastReceiver,intentFilter);
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(broadcastReceiver);
+        super.onStop();
+    }
+
+    private void alertConection()
+    {
+
+        builder.setTitle("No Internet Connection!");
+        builder.setMessage("Sorry! no Internet connectivety detected. Please Reconnect and try again.");
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                boolean isConnected = ConnectivityReceiver.isConnected(getApplicationContext());
+                if(!isConnected)
+                    alertConection();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     public void signUp(View view) {
 
@@ -82,7 +156,7 @@ public class SignUpView extends AppCompatActivity implements SignUpPresenterToVi
     @Override
     public void showErrorEmail() {
         progressBar.setVisibility(View.GONE);
-        email_Edt_Txt.setError("Enter Email");
+        email_Edt_Txt.setError("Enter Valid Email");
     }
 
     @Override

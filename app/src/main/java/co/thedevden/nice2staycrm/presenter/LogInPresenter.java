@@ -29,18 +29,22 @@ public class LogInPresenter implements LoginToPresenter {
     @Override
     public void performLogin(String userName, String password) {
 
-        if (TextUtils.isEmpty(userName)) {
-            logInView.userNameError();
-        }
-        else {
+        if (TextUtils.isEmpty(userName)|| TextUtils.isEmpty(password))
+        {
             if (TextUtils.isEmpty(password)) {
                 logInView.passwordError();
             }
-            else
-            {
-                model.PerformLoginOperation(userName,password);
-
+            if (TextUtils.isEmpty(userName)) {
+                logInView.userNameError();
             }
+        }
+        else {
+
+            if(isEmailValid(userName))
+                model.PerformLoginOperation(userName,password);
+            else
+                logInView.userNameError();
+
 
         }
     }
@@ -50,6 +54,10 @@ public class LogInPresenter implements LoginToPresenter {
 //    public void isLoggedIn() {
 //        model.isLoggedIn();
 //    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     @Override
     public void onLoginResponse(boolean message) {

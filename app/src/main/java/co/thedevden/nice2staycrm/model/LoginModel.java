@@ -14,9 +14,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +57,7 @@ public class LoginModel implements LoginPresenterToModel {
     @Override
     public void PerformLoginOperation(final String userName, String password) {
 
-        JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("email",userName);
             jsonObject.put("password",password);
@@ -110,7 +112,23 @@ public class LoginModel implements LoginPresenterToModel {
             public void onErrorResponse(VolleyError error) {
                 Log.d("VolleyError",error.toString());
 
-                presenter.onError(error.toString());
+                String jsonMessage = null;
+                try
+                {
+                    String responseBody = new String(error.networkResponse.data, "utf-8");
+                    JSONObject data = new JSONObject(responseBody);
+                    JSONArray errors = data.getJSONArray("errors");
+                    jsonMessage = errors.get(0).toString();
+
+
+
+
+                }
+                catch (JSONException e) {
+                } catch (UnsupportedEncodingException errorr) {
+                }
+
+                presenter.onError(jsonMessage);
 
             }
         })

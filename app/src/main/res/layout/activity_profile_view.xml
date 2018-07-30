@@ -65,7 +65,6 @@
                     android:background="#237DCE"
                     android:paddingBottom="10dp">
 
-
                     <ImageView
                         android:id="@+id/edit"
                         android:layout_width="wrap_content"

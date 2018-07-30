@@ -1,6 +1,12 @@
 package co.thedevden.nice2staycrm.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +24,7 @@ import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.connector.ProfilePresenterToView;
 import co.thedevden.nice2staycrm.connector.ProfileToPresenter;
 import co.thedevden.nice2staycrm.presenter.ProfilePresenter;
+import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
 public class ProfileView extends AppCompatActivity implements ProfilePresenterToView{
 
@@ -29,11 +36,18 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
     ImageView editImageview;
     String firstNameStr,lastNameStr,emailStr,passwordStr,confirmPasswordStr,bussinessNameStr;
     ProfileToPresenter presenter;
+    AlertDialog.Builder builder;
+    BroadcastReceiver broadcastReceiver;
+    View view,view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_view);
+
+
+        view = getLayoutInflater().inflate(R.layout.activity_profile_view,null);
+        view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
+        setContentView(view);
 
         fNamePro_Edt_Txt = (EditText) findViewById(R.id.firstname_profile);
         lNamePro_Edt_Txt = (EditText) findViewById(R.id.lastname_profile);
@@ -47,6 +61,8 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
         TILPass = (TextInputLayout) findViewById(R.id.passwordProTIL);
         cnfrmTv = (TextView) findViewById(R.id.cnfmpasswordshowtv);
         passtv = (TextView) findViewById(R.id.passwordshowtv);
+
+        builder = new AlertDialog.Builder(this);
 
         presenter = new ProfilePresenter(this,this);
 
@@ -80,6 +96,63 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
 
     }
 
+
+    public void checkInternet()
+    {
+        IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(ConnectivityReceiver.isConnected(getApplicationContext()))
+                {
+                    setContentView(view);
+                    return;
+
+                }
+                else
+                {
+                    setContentView(view2);
+                    alertConection();
+                }
+            }
+        };
+
+        registerReceiver(broadcastReceiver,intentFilter);
+
+    }
+
+    private void alertConection()
+    {
+
+        builder.setTitle("No Internet Connection!");
+        builder.setMessage("Sorry! no Internet connectivety detected. Please Reconnect and try again.");
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                boolean isConnected = ConnectivityReceiver.isConnected(getApplicationContext());
+                if(!isConnected)
+                    alertConection();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        checkInternet();
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(broadcastReceiver);
+        super.onStop();
+    }
 
     @Override
     public void editProfile() {

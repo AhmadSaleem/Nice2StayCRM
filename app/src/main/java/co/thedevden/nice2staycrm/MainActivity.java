@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     TextView navpersonName,navEmail;
     private String token;
     boolean istoken;
+    ImageView settings;
 
 
     @Override
@@ -43,19 +45,29 @@ public class MainActivity extends AppCompatActivity
         navpersonName = (TextView) headerView.findViewById(R.id.personName);
         navEmail = (TextView) headerView.findViewById(R.id.personEmail);
 
+        settings = (ImageView) headerView.findViewById(R.id.settingsnav);
 
         navpersonName.setText(SharedPreferencesUtils.getInstance(this).getStringValue("name",null)+" " + SharedPreferencesUtils.getInstance(this).getStringValue("surname",null));
         navEmail.setText(SharedPreferencesUtils.getInstance(this).getStringValue("personEmail",null));
 
-        CircleImageView circleImage = (CircleImageView) headerView.findViewById(R.id.profile);
-
-        circleImage.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ProfileView.class);
                 startActivity(intent);
+
             }
         });
+
+//        CircleImageView circleImage = (CircleImageView) headerView.findViewById(R.id.profile);
+//
+//        circleImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,ProfileView.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,10 +92,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public  void showProfile(View view)
-    {
-
-    }
 
     @Override
     public void onBackPressed() {

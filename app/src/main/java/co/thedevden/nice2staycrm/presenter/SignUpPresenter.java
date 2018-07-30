@@ -59,7 +59,10 @@ public class SignUpPresenter implements SignUpToPresenter {
            }
            else
            {
+               if (isEmailValid(email))
                tomodel.signUp(firstname,surname, bussiness, email, pass, confirmPass);
+               else
+                   signUpview.showErrorEmail();
            }
 
 
@@ -69,6 +72,11 @@ public class SignUpPresenter implements SignUpToPresenter {
 
 
     }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
 
     @Override
     public void signUpResponse(boolean check) {
