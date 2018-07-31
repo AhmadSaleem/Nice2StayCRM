@@ -35,7 +35,7 @@ public class AccomodationsView extends AppCompatActivity implements Accomodation
     Accomodation_Adapter adapter;
     private RecyclerView recyclerView;
     LinearLayoutManager manager;
-
+    TextView noAccomodations;
 
     AlertDialog.Builder builder;
     BroadcastReceiver broadcastReceiver;
@@ -53,6 +53,7 @@ public class AccomodationsView extends AppCompatActivity implements Accomodation
         presenter = new AccomodationPresenter(this,this);
         progressBar = (ProgressBar) findViewById(R.id.progressBarAccomodation);
 
+        noAccomodations = (TextView) findViewById(R.id.textView6);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewAccomodation);
 
 
@@ -64,9 +65,9 @@ public class AccomodationsView extends AppCompatActivity implements Accomodation
     @Override
     protected void onResume() {
 
+
         checkInternet();
         presenter.showAccomodations();
-
         super.onResume();
 
 
@@ -137,6 +138,13 @@ public class AccomodationsView extends AppCompatActivity implements Accomodation
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void noAccomodations() {
+        progressBar.setVisibility(View.GONE);
+        noAccomodations.setVisibility(View.VISIBLE);
+        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
     }
 
     public void addAccomodation(View view) {

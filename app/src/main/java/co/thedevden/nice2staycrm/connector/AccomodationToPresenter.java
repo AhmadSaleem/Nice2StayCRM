@@ -9,5 +9,6 @@ public interface AccomodationToPresenter {
     void showAccomodations();
     void  showErrors(String Message);
     void showLayout(List<AccomodationModel> list);
+    void noAccomodations();
 
 }

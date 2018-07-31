@@ -377,8 +377,14 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
         name_Edt_Txt.setText("");
         type_Edt_Txt.setText("");
         person_Edt_Txt.setText("");
+        country_spinner.setSelection(0);
+        region_spinner.setSelection(0);
         listed_switch.setChecked(false);
+        Intent intent = new Intent(AddAccomodationView.this,AccomodationsView.class);
+        startActivity(intent);
+        finish();
         Toast.makeText(this, "Accomodation Created Successfully!", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

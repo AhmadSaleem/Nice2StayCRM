@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -40,11 +43,16 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
         setContentView(view);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
         builder = new AlertDialog.Builder(this);
 
 
-        userName = (EditText) findViewById(R.id.editText);
-        password = (EditText) findViewById(R.id.editText2);
+//        userName = (EditText) findViewById(R.id.editText);
+//        password = (EditText) findViewById(R.id.editText2);
         progressBar = (ProgressBar) findViewById(R.id.loginProgressBar);
         logInPresenter = new LogInPresenter(this,this);
 

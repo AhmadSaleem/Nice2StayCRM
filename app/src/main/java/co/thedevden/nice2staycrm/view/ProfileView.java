@@ -73,6 +73,9 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
                 fNamePro_Edt_Txt.setEnabled(true);
                 lNamePro_Edt_Txt.setEnabled(true);
                 bussPro_Edt_Txt.setEnabled(true);
+                fNamePro_Edt_Txt.setSelection(fNamePro_Edt_Txt.getText().length());
+                fNamePro_Edt_Txt.requestFocus();
+
 
                 cnfrmProPass_Edt_Txt.setVisibility(View.VISIBLE);
                 cnfrmTv.setVisibility(View.VISIBLE);

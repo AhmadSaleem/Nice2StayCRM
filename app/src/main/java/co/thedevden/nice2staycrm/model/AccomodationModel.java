@@ -142,35 +142,47 @@ public class AccomodationModel implements AccomodationPresenterToModel {
             public void onResponse(JSONArray response) {
 
                 Log.d("Code",response.toString());
+
                 //Toast.makeText(MainActivity.this, "in response", Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = new JSONObject();
 
+                Log.d("responselength",String.valueOf(response.length()));
 
-                for (int i=0;i<response.length();i++)
+                if(response.length()>0)
                 {
-                    try
+                    for (int i=0;i<response.length();i++)
                     {
-                        jsonObject = response.getJSONObject(i);
+                        try
+                        {
+                            jsonObject = response.getJSONObject(i);
 
-                        AccomodationModel accomodation = new AccomodationModel(context,presenter);
-                        accomodation.setId(jsonObject.getInt("id"));
-                        accomodation.setName(jsonObject.getString("name"));
-                        accomodation.setPersons_number(jsonObject.getInt("persons_number"));
-                        accomodation.setCountry_name(jsonObject.getString("country_name"));
-                        accomodation.setRegion_name(jsonObject.getString("region_name"));
-                        accomodation.setType(jsonObject.getString("type"));
-                        accomodation.setListed_to(jsonObject.getBoolean("listed_to"));
+                            AccomodationModel accomodation = new AccomodationModel(context,presenter);
+                            accomodation.setId(jsonObject.getInt("id"));
+                            accomodation.setName(jsonObject.getString("name"));
+                            accomodation.setPersons_number(jsonObject.getInt("persons_number"));
+                            accomodation.setCountry_name(jsonObject.getString("country_name"));
+                            accomodation.setRegion_name(jsonObject.getString("region_name"));
+                            accomodation.setType(jsonObject.getString("type"));
+                            accomodation.setListed_to(jsonObject.getBoolean("listed_to"));
 
-                        myaccomodationList.add(accomodation);
+                            myaccomodationList.add(accomodation);
 
 
 
-                    }
-                    catch (JSONException e )
-                    {
-                        e.printStackTrace();
+                        }
+                        catch (JSONException e )
+                        {
+                            e.printStackTrace();
+                        }
+
+
+
                     }
                     presenter.showLayout(myaccomodationList);
+                }
+                else
+                {
+                    presenter.noAccomodations();
 
                 }
             }

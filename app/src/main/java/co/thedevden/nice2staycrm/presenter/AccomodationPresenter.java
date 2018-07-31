@@ -36,4 +36,9 @@ public class AccomodationPresenter implements AccomodationToPresenter {
 
         view.showLayout(list);
     }
+
+    @Override
+    public void noAccomodations() {
+        view.noAccomodations();
+    }
 }

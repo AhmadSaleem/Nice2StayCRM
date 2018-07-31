@@ -8,4 +8,5 @@ public interface AccomodationPresenterToView {
 
     void showError(String message);
     void showLayout(List<AccomodationModel> list);
+    void noAccomodations();
 }
