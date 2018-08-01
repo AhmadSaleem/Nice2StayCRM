@@ -51,8 +51,10 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
         builder = new AlertDialog.Builder(this);
 
 
-//        userName = (EditText) findViewById(R.id.editText);
-//        password = (EditText) findViewById(R.id.editText2);
+        userName = (EditText) findViewById(R.id.editText);
+        password = (EditText) findViewById(R.id.editText2);
+
+
         progressBar = (ProgressBar) findViewById(R.id.loginProgressBar);
         logInPresenter = new LogInPresenter(this,this);
 
@@ -138,11 +140,6 @@ public class LogInView extends AppCompatActivity implements LoginPresenterToView
 
     }
 
-    public void signUpContinue(View view) {
-       Intent intent = new Intent(LogInView.this,SignUpView.class);
-       startActivity(intent);
-       finish();
-    }
 
     @Override
     protected void onResume() {

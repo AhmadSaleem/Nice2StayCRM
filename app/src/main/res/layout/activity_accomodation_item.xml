@@ -11,7 +11,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/appBarLayout">
+        android:id="@+id/appBarLayout"
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -42,10 +43,11 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/accomodation_Name"
                     android:textColor="#000"
+                    android:gravity="center"
                     android:textSize="22sp"
                     style="@style/Base.TextAppearance.AppCompat.Title"
                     android:text="Accomodation Name"
@@ -59,18 +61,19 @@
                     android:onClick="updateAccomodation"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:src="@android:drawable/ic_menu_edit" />
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/accomodation_Country"
                     android:textSize="15sp"
                     android:textColor="#000"
+                    android:gravity="center"
                     android:layout_below="@+id/accomodation_Name"
                     android:layout_marginTop="10dp"
                     style="@style/Base.TextAppearance.AppCompat.Title"
@@ -79,7 +82,8 @@
 
                 <TextView
                     android:id="@+id/accomodation_Type"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/accomodation_Country"
                     android:layout_marginTop="9dp"
@@ -104,7 +108,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
 
             <TextView

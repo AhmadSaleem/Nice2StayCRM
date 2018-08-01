@@ -70,7 +70,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
         person_Edt_Txt = (EditText) findViewById(R.id.noOFPersons);
         country_spinner = (Spinner) findViewById(R.id.country);
         region_spinner = (Spinner) findViewById(R.id.region);
-        category_spinner = (Spinner) findViewById(R.id.category);
+        //category_spinner = (Spinner) findViewById(R.id.category);
         listed_switch = (Switch) findViewById(R.id.listtedToSwitch);
         addAccomodation = (LinearLayout) findViewById(R.id.addAccomodation);
         progressBar = (ProgressBar) findViewById(R.id.addAccProgressBar);
@@ -237,7 +237,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
 
         Log.d("names",names.toString());
 
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names){
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -266,7 +266,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
 
         };
 
-        countryAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        countryAdapter.setDropDownViewResource(R.layout.spinner_item);
 
         country_spinner.setAdapter(countryAdapter);
 
@@ -305,7 +305,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
 
         Log.d("names",names.toString());
 
-        ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names){
+        ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, names){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -331,7 +331,8 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
                 return view;
             }
         };
-        regionAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        regionAdapter.setDropDownViewResource(R.layout.spinner_item);
+
 
         region_spinner.setAdapter(regionAdapter);
 

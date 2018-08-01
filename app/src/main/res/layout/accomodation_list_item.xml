@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
@@ -41,8 +41,18 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/accomo_image"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/item_back"
+                    android:scaleType="centerCrop"
+                    />
+
                 <TextView
                     android:id="@+id/Name_accomodation"
+                    android:layout_toRightOf="@+id/accomo_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Accomodation Name Here"
@@ -52,9 +62,11 @@
 
                 <TextView
                     android:id="@+id/country_accomodation"
+                    android:layout_toRightOf="@+id/accomo_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pakistan"
+                    android:layout_below="@+id/Name_accomodation"
                     android:layout_weight="0.25"
                     android:textColor="#8C8B8B"
                     android:textSize="14dp"/>
@@ -64,14 +76,16 @@
                     android:id="@+id/type_accomodation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/accomo_image"
                     android:layout_marginTop="15dp"
+                    android:layout_below="@+id/country_accomodation"
                     android:text="Apartment"
                     android:layout_weight="0.25"
                     android:textColor="#8C8B8B"
                     android:textSize="12dp"/>
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </android.support.constraint.ConstraintLayout>
 
