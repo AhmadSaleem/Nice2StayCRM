@@ -120,10 +120,9 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
                 }
             });
 
-
-
             presenter.showCountries();
             presenter.showRegions();
+
 
         }
         else

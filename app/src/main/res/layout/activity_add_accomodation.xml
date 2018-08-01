@@ -145,7 +145,6 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:background="@android:color/transparent"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:ems="10"
                     android:gravity="right"
                     android:hint="Enter Persons"
