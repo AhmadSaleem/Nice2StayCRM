@@ -43,19 +43,23 @@ public class MainActivity extends AppCompatActivity
     boolean istoken;
     ImageView settings;
     private NotificationManager notifManager;
+     public  static DrawerLayout drawer;
+     ImageView opendrawer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         NavigationView navigationViewTitles = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationViewTitles.getHeaderView(0);
         navpersonName = (TextView) headerView.findViewById(R.id.personName);
         navEmail = (TextView) headerView.findViewById(R.id.personEmail);
+        opendrawer = (ImageView) findViewById(R.id.opendrawer);
+
 
         settings = (ImageView) headerView.findViewById(R.id.settingsnav);
 
@@ -91,11 +95,21 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        opendrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
