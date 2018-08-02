@@ -18,14 +18,17 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/myriad_pro_regular"
         android:text="SignUp"
         android:textColor="@color/colorWhite"
         android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -310,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:onClick="logInContinue"
-                    android:text="Sign Up"
+                    android:text="Sign In"
                     android:textColor="#fff"
                     android:textSize="12dp"
                     android:textStyle="bold" />
