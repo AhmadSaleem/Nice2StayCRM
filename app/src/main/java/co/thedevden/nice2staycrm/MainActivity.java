@@ -51,14 +51,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         NavigationView navigationViewTitles = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationViewTitles.getHeaderView(0);
         navpersonName = (TextView) headerView.findViewById(R.id.personName);
         navEmail = (TextView) headerView.findViewById(R.id.personEmail);
-        opendrawer = (ImageView) findViewById(R.id.opendrawer);
 
 
         settings = (ImageView) headerView.findViewById(R.id.settingsnav);
@@ -86,30 +85,15 @@ public class MainActivity extends AppCompatActivity
 //        });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        opendrawer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawer.openDrawer(GravityCompat.START);
-            }
-        });
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
