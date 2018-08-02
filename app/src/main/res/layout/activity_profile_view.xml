@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ProfileView"
-    android:background="#DCEEFE">
+    android:fitsSystemWindows="true"
+    android:background="@color/colorWhite"
+    tools:context=".view.ProfileView">
 
 
     <LinearLayout
@@ -29,31 +30,29 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/nav_blur"
+                android:layout_weight="0.2"
+                android:background="@drawable/profile_bg"
                 android:scaleType="centerCrop" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-
                 android:id="@+id/profile"
                 android:layout_width="200dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="-40dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="-50dp"
                 android:layout_weight="0.1"
                 android:clickable="true"
-                android:elevation="5dp"
-
+                android:elevation="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/man"
                 app:civ_border_color="#FFFFFFFF"
-                app:civ_border_width="3dp" />
+                app:civ_border_width="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:background="#DCEEFE"
+                android:layout_weight="0.4"
+                android:background="@color/colorWhite"
                 android:elevation="4dp"
                 android:orientation="vertical">
 
@@ -62,75 +61,120 @@
                     android:id="@+id/profile_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#237DCE"
-                    android:paddingBottom="10dp">
+                    android:background="@color/colorWhite"
+                    android:padding="15dp">
 
-                    <ImageView
-                        android:id="@+id/edit"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/imagelinear"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:clickable="true"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
-                        android:src="@android:drawable/ic_menu_edit" />
+                        <ImageView
+                            android:id="@+id/edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="16dp"
+                            android:clickable="true"
+                            android:src="@android:drawable/ic_menu_edit" />
+
+                    </LinearLayout>
 
 
-                    <TextView
-                        android:id="@+id/firstnametv"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/firstlinear"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="13dp"
-                        android:text="FirstName: "
-                        android:textColor="#fff"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlCompat" />
-
-                    <EditText
-                        android:id="@+id/firstname_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                        android:layout_toRightOf="@+id/firstnametv"
-                        android:background="@android:color/transparent"
-                        android:enabled="false"
-                        android:text="Hamza"
-                        android:textColor="#fff"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:layout_below="@+id/imagelinear"
+                        android:orientation="horizontal">
 
 
-                    <TextView
-                        android:id="@+id/lasttv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/lastname_profile"
-                        android:layout_marginStart="14dp"
-                        android:text="LastName: "
-                        android:textColor="#fff"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlCompat" />
+                        <TextView
+                            android:id="@+id/firstnametv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" First Name"
+                            android:textColor="#a2a1b8"
+                            android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/lastname_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/firstname_profile"
+
+                        <EditText
+                            android:id="@+id/firstname_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autoSizeTextType="uniform"
+                            android:background="@android:color/transparent"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:ems="10"
+                            android:gravity="right"
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:text="Hamza"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/firstnameview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/firstlinear"
+                        android:layout_marginBottom="20dp"
                         android:layout_marginTop="10dp"
-                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                        android:layout_toRightOf="@+id/lasttv"
-                        android:background="@android:color/transparent"
-                        android:enabled="false"
-                        android:text="Ehsan"
-                        android:textColor="#fff"
-                        android:textSize="18sp" />
+                        android:background="#eeeeee" />
+
+                    <LinearLayout
+                        android:id="@+id/lastlinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/firstnameview"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/lasttv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" Last Name"
+                            android:textColor="#a2a1b8"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/lastname_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autoSizeTextType="uniform"
+                            android:background="@android:color/transparent"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:ems="10"
+                            android:gravity="right"
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:text="Ehsan"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/lastnameview"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/lastlinear"
+                        android:layout_marginTop="10dp"
+                        android:background="#eeeeee" />
+
                 </RelativeLayout>
 
 
@@ -143,143 +187,187 @@
                         android:id="@+id/profile_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:padding="15dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/emailtv"
-                            android:layout_marginStart="16dp"
-                            android:text="Email: "
-                            android:textColor="#000"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            tools:ignore="RtlCompat" />
+                            android:orientation="vertical">
 
-                        <EditText
-                            android:id="@+id/email_profile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/emailtv"
-
-                            android:background="@android:color/transparent"
-                            android:enabled="false"
-                            android:text="abc@domain.com"
-                            android:textColor="#000000"
-                            android:textSize="18sp"
-                            tools:ignore="RtlCompat" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:id="@+id/busstv"
-                            android:layout_marginTop="10dp"
-                            android:layout_below="@+id/emailtv"
-                            android:text="Bussiness: "
-                            android:textColor="#000"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            tools:ignore="RtlCompat" />
-
-                        <EditText
-
-                            android:id="@+id/businessName_profile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/busstv"
-                            android:layout_below="@+id/email_profile"
-                            android:layout_marginTop="10dp"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                            android:background="@android:color/transparent"
-                            android:enabled="false"
-                            android:text="The Dev Den"
-                            android:textColor="#000000" />
-
-
-                        <TextView
-                            android:id="@+id/passwordshowtv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_below="@+id/busstv"
-                            android:text="Password: "
-                           android:textColor="#000"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="20dp"
-                            android:visibility="gone"
-                            tools:ignore="RtlCompat" />
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/passwordProTIL"
-                            android:layout_width="200dp"
-                            android:layout_toRightOf="@+id/passwordshowtv"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/businessName_profile"
-                            android:visibility="gone"
-                            app:passwordToggleEnabled="true"
-                            tools:ignore="RtlCompat">
-
-                            <EditText
-                                android:id="@+id/profilePassword"
-                                android:layout_width="fill_parent"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@android:color/transparent"
-                                android:hint="Password"
-                                android:inputType="textPassword"
-                                android:singleLine="true"
-                                tools:ignore="RtlCompat" />
+                                android:orientation="horizontal">
 
-                        </android.support.design.widget.TextInputLayout>
+                                <TextView
+                                    android:id="@+id/emailtv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" Email"
+                                    android:textColor="#a2a1b8"
+                                    android:textSize="16sp" />
 
-                        <TextView
-                            android:id="@+id/cnfmpasswordshowtv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/passwordshowtv"
-                            android:text="ConfirmPass: "
-                            android:layout_marginTop="40dp"
-                            android:layout_marginStart="14dp"
-                            android:textColor="#000"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:visibility="gone"
-                            tools:ignore="RtlCompat" />
+                                <EditText
+                                    android:id="@+id/email_profile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeTextType="uniform"
+                                    android:background="@android:color/transparent"
+                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                    android:ems="10"
+                                    android:gravity="right"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="10dp"
+                                    android:singleLine="true"
+                                    android:text="hamzashiqbal@gmail.com"
+                                    android:textColor="#000"
+                                    android:textSize="16dp"
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/cnfmpasswordProTIL"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/passwordProTIL"
-                            android:layout_toRightOf="@+id/cnfmpasswordshowtv"
-                            android:visibility="gone"
-                            app:passwordToggleEnabled="true">
+                                    />
 
-                            <EditText
-                                android:id="@+id/cnfmprofilePassword"
-                                android:layout_width="fill_parent"
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@id/lastlinear"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="10dp"
+                                android:background="#eeeeee" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="ConfirmPass"
-                                android:inputType="textPassword"
-                                android:singleLine="true"
-                                tools:ignore="RtlCompat" />
+                                android:orientation="horizontal">
 
-                        </android.support.design.widget.TextInputLayout>
+                                <TextView
+                                    android:id="@+id/busstv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Business"
+                                    android:textColor="#a2a1b8"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/businessName_profile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeTextType="uniform"
+                                    android:background="@android:color/transparent"
+                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                    android:ems="10"
+                                    android:gravity="right"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="10dp"
+                                    android:singleLine="true"
+                                    android:text="The Dev Den"
+                                    android:textColor="#000"
+                                    android:textSize="16dp"
+
+                                    />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="15dp"
+                                android:background="#eeeeee" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
 
-                        <Button
-                            android:layout_width="130dp"
-                            android:layout_height="40dp"
-                            android:text="SUBMIT"
-                            android:layout_centerHorizontal="true"
-                            android:textColor="#fff"
-                            android:id="@+id/submitProfileButton"
-                            android:layout_marginTop="20dp"
-                            android:visibility="gone"
-                            android:layout_below="@+id/cnfmpasswordshowtv"
-                            android:background="@drawable/buttonshapeprofile"
-                            />
+                                <TextView
+                                    android:id="@+id/passwordshowtv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Password: "
+                                    android:textColor="#a2a1b8"
+                                    android:textSize="16sp"
+                                    android:visibility="gone" />
+
+                                <EditText
+                                    android:id="@+id/profilePassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeTextType="uniform"
+                                    android:background="@android:color/transparent"
+                                    android:ems="10"
+                                    android:gravity="right"
+                                    android:hint="Password"
+                                    android:inputType="textPassword"
+                                    android:paddingLeft="10dp"
+                                    android:singleLine="true"
+                                    android:textColor="#000"
+                                    android:textSize="16dp"
+                                    android:visibility="gone"
+
+                                    />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:id="@+id/belowpassview"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="15dp"
+                                android:background="#eeeeee"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                android:orientation="horizontal">
+
+
+                                <TextView
+                                    android:id="@+id/cnfmpasswordshowtv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ConfirmPass: "
+                                    android:textColor="#a2a1b8"
+                                    android:textSize="16sp"
+                                    android:visibility="gone" />
+
+                                <EditText
+                                    android:id="@+id/cnfmprofilePassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeTextType="uniform"
+                                    android:background="@android:color/transparent"
+                                    android:ems="10"
+                                    android:gravity="right"
+                                    android:hint="Confirm Password"
+                                    android:inputType="textPassword"
+                                    android:paddingLeft="10dp"
+                                    android:singleLine="true"
+                                    android:textColor="#000"
+                                    android:textSize="16dp"
+                                    android:visibility="gone"
+
+                                    />
+
+
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/submitProfileButton"
+                                android:layout_width="130dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/buttonshapeprofile"
+                                android:gravity="center"
+                                android:text="SUBMIT"
+                                android:textColor="#fff"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
 
                     </RelativeLayout>
 
@@ -292,4 +380,20 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/profileProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

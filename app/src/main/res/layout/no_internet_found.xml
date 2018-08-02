@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@drawable/backgorund">
 
 
@@ -24,8 +25,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
 
+        <ImageView
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

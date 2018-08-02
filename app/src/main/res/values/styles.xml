@@ -9,9 +9,9 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="android:windowTranslucentStatus" tools:ignore="NewApi">false</item>
+        <item name="android:windowTranslucentStatus" tools:ignore="NewApi">true</item>
         <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">#000</item>
         </style>
 
     <style name="MyDatePickerSpinnerStyle" parent="@android:style/Widget.Material.DatePicker" tools:targetApi="lollipop">
