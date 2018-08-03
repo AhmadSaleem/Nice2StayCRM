@@ -66,7 +66,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.MyVi
         myViewHolder.accomoName.setText(mypromotionslist.get(i).getShort_desc());
         myViewHolder.promoDiscount.setText(String.valueOf(mypromotionslist.get(i).getValue()));
 
-        
+
         String from_date = mypromotionslist.get(i).getFrom();
         String to_date = mypromotionslist.get(i).getTo();
         String valid_date = mypromotionslist.get(i).getValid_to();
