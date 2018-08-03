@@ -13,6 +13,10 @@
             android:id="@+id/nav_accomodations"
             android:icon="@drawable/ic_accomodation_24dp"
             android:title="Accomodations" />
+        <item
+            android:id="@+id/nav_promotions"
+            android:icon="@drawable/ic_promotions_24dp"
+            android:title="Promotions" />
 
         <item
             android:id="@+id/nav_logout"

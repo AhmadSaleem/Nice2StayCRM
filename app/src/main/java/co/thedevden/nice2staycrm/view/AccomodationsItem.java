@@ -174,12 +174,7 @@ public class AccomodationsItem extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -217,6 +212,13 @@ public class AccomodationsItem extends AppCompatActivity
                 startActivity(intent2);
                 finish();
                 break;
+
+            case R.id.nav_promotions:
+                Intent myintent2 = new Intent(AccomodationsItem.this,Promotions.class);
+                startActivity(myintent2);
+                finish();
+                break;
+
 
 
 

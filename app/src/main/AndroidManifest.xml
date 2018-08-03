@@ -69,6 +69,14 @@
         <activity
             android:name=".view.AddAccomodations"
             android:label="@string/title_activity_add_accomodations"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Promotions"
+            android:label="@string/title_activity_promotions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AddPromotion"
+            android:label="@string/title_activity_add_promotion"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

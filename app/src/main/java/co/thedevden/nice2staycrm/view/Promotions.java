@@ -29,61 +29,68 @@ import java.util.List;
 import co.thedevden.nice2staycrm.MainActivity;
 import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.adapter.Accomodation_Adapter;
-import co.thedevden.nice2staycrm.connector.AccomodationPresenterToView;
+import co.thedevden.nice2staycrm.adapter.PromotionAdapter;
 import co.thedevden.nice2staycrm.connector.AccomodationToPresenter;
+import co.thedevden.nice2staycrm.connector.PromotionPresenterToView;
+import co.thedevden.nice2staycrm.connector.PromotionToPresenter;
 import co.thedevden.nice2staycrm.model.AccomodationModel;
+import co.thedevden.nice2staycrm.model.PromotionModel;
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
 import co.thedevden.nice2staycrm.presenter.AccomodationPresenter;
+import co.thedevden.nice2staycrm.presenter.PromotionPresenter;
 import co.thedevden.nice2staycrm.service.RefreshToken;
 import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
-public class Accomodations extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,AccomodationPresenterToView {
+public class Promotions extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,PromotionPresenterToView {
 
-    AccomodationToPresenter presenter;
+
+    boolean istoken;
+    PromotionToPresenter presenter;
     ProgressBar progressBar;
-    Accomodation_Adapter adapter;
+    PromotionAdapter adapter;
     private RecyclerView recyclerView;
     LinearLayoutManager manager;
-    TextView noAccomodations;
-    boolean istoken;
+    TextView noPromotions;
 
     AlertDialog.Builder builder;
     BroadcastReceiver broadcastReceiver;
 
     View view,view2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = getLayoutInflater().inflate(R.layout.activity_accomodations,null);
+
+        view = getLayoutInflater().inflate(R.layout.activity_promotions,null);
         view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
         setContentView(view);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAccomo);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pro);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_Accomo);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_pro);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_Accomo);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_pro);
         navigationView.setNavigationItemSelectedListener(this);
 
-        presenter = new AccomodationPresenter(this,this);
-        progressBar = (ProgressBar) findViewById(R.id.PBAccomo);
+        presenter = new PromotionPresenter(this,this);
 
-        noAccomodations = (TextView) findViewById(R.id.tvaccomo);
-        recyclerView = (RecyclerView) findViewById(R.id.RVAccomo);
+        progressBar = (ProgressBar) findViewById(R.id.progressBarPromotions);
+
+        noPromotions = (TextView) findViewById(R.id.tvPromotions);
+        recyclerView = (RecyclerView) findViewById(R.id.RecyclerViewPromotions);
 
 
         builder  =new AlertDialog.Builder(this);
 
         progressBar.setVisibility(View.VISIBLE);
-
-
 
     }
 
@@ -92,7 +99,7 @@ public class Accomodations extends AppCompatActivity
 
 
         checkInternet();
-        presenter.showAccomodations();
+        presenter.showPromotions();
         super.onResume();
 
 
@@ -155,10 +162,12 @@ public class Accomodations extends AppCompatActivity
 
     }
 
-    @Override
-    public void showLayout(List<AccomodationModel> list) {
 
-        adapter= new Accomodation_Adapter(getApplicationContext(),list);
+
+    @Override
+    public void showLayout(List<PromotionModel> list) {
+
+        adapter= new PromotionAdapter(getApplicationContext(),list);
         manager=new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -166,27 +175,22 @@ public class Accomodations extends AppCompatActivity
     }
 
     @Override
-    public void noAccomodations() {
+    public void noPromotions() {
         progressBar.setVisibility(View.GONE);
-        noAccomodations.setVisibility(View.VISIBLE);
+        noPromotions.setVisibility(View.VISIBLE);
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
     }
 
-    public void addAccomodation(View view) {
 
-        Intent intent  = new Intent(Accomodations.this,AddAccomodations.class);
-        startActivity(intent);
-    }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_Accomo);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_pro);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
-
 
 
     @Override
@@ -214,34 +218,39 @@ public class Accomodations extends AppCompatActivity
                 istoken=false;
 
 
-                Intent service = new Intent(Accomodations.this,RefreshToken.class);
+                Intent service = new Intent(Promotions.this,RefreshToken.class);
                 stopService(service);
 
-                Intent intent = new Intent(Accomodations.this,LogInView.class);
+                Intent intent = new Intent(Promotions.this,LogInView.class);
                 startActivity(intent);
                 finish();
 
                 break;
 
+            case R.id.nav_accomodations:
+                Intent myintent = new Intent(Promotions.this,Accomodations.class);
+                startActivity(myintent);
+                finish();
+                break;
+
             case R.id.nav_home:
-                Intent intent2 = new Intent(Accomodations.this,MainActivity.class);
+                Intent intent2 = new Intent(Promotions.this,MainActivity.class);
                 startActivity(intent2);
                 finish();
                 break;
-            case R.id.nav_promotions:
-                Intent myintent2 = new Intent(Accomodations.this,Promotions.class);
-                startActivity(myintent2);
-                finish();
-                break;
-
-
-
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_Accomo);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_pro);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void addAccomodationPromotion(View view) {
+
+        Intent intent  = new Intent(Promotions.this,AddPromotion.class);
+        startActivity(intent);
+    }
+
 
 }

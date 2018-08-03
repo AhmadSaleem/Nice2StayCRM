@@ -27,6 +27,7 @@ import co.thedevden.nice2staycrm.view.Accomodations;
 import co.thedevden.nice2staycrm.view.BookingsView;
 import co.thedevden.nice2staycrm.view.LogInView;
 import co.thedevden.nice2staycrm.view.ProfileView;
+import co.thedevden.nice2staycrm.view.Promotions;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -110,12 +111,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -124,10 +119,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -159,6 +150,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_accomodations:
                 Intent myintent = new Intent(MainActivity.this,Accomodations.class);
                 startActivity(myintent);
+                finish();
+                break;
+            case R.id.nav_promotions:
+                Intent myintent2 = new Intent(MainActivity.this,Promotions.class);
+                startActivity(myintent2);
                 finish();
                 break;
 

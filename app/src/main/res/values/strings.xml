@@ -5,9 +5,11 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_accomodations_list">AccomodationsList</string>
     <string name="title_activity_accomodations">Accomodations</string>
     <string name="title_activity_accomodations_item">AccomodationsItem</string>
     <string name="title_activity_add_accomodations">AddAccomodations</string>
+    <string name="title_activity_promotions">Promotions</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_promotion">AddPromotion</string>
 </resources>

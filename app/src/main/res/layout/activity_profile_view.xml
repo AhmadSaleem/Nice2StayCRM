@@ -218,6 +218,7 @@
                                     android:gravity="right"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="10dp"
+                                    android:enabled="false"
                                     android:singleLine="true"
                                     android:text="hamzashiqbal@gmail.com"
                                     android:textColor="#000"

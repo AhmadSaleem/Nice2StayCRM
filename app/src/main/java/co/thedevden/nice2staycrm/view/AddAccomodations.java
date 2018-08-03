@@ -204,12 +204,6 @@ public class AddAccomodations extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -218,10 +212,6 @@ public class AddAccomodations extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -260,6 +250,12 @@ public class AddAccomodations extends AppCompatActivity
                 startActivity(intent2);
                 finish();
                 break;
+            case R.id.nav_promotions:
+                Intent myintent2 = new Intent(AddAccomodations.this,Promotions.class);
+                startActivity(myintent2);
+                finish();
+                break;
+
 
 
 
