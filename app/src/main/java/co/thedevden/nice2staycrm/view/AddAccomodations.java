@@ -6,11 +6,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,14 +33,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import co.thedevden.nice2staycrm.MainActivity;
 import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.connector.AddPresenterToView;
 import co.thedevden.nice2staycrm.connector.AddToPresenter;
 import co.thedevden.nice2staycrm.model.SharedPreferencesUtils;
 import co.thedevden.nice2staycrm.presenter.AddAccomodationPresenter;
+import co.thedevden.nice2staycrm.service.RefreshToken;
 import co.thedevden.nice2staycrm.utils.ConnectivityReceiver;
 
-public class AddAccomodationView extends AppCompatActivity implements AddPresenterToView{
+public class AddAccomodations extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,AddPresenterToView {
 
     EditText name_Edt_Txt,type_Edt_Txt,person_Edt_Txt;
     Spinner country_spinner,region_spinner,category_spinner;
@@ -48,19 +60,38 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
     ArrayList<String> countryNames;
     ArrayList<String> regionNames;
     String coun,reg;
+    boolean istoken;
 
     AlertDialog.Builder builder;
     BroadcastReceiver broadcastReceiver;
 
     View view,view2;
+    Toolbar toolbar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        view = getLayoutInflater().inflate(R.layout.activity_add_accomodation,null);
+        view = getLayoutInflater().inflate(R.layout.activity_add_accomodations,null);
         view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
         setContentView(view);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar_add);
+        setSupportActionBar(toolbar);
+
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+//        view = getLayoutInflater().inflate(R.layout.activity_add_accomodation,null);
+//        view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
+//        setContentView(view);
 
 
 
@@ -74,7 +105,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
         listed_switch = (Switch) findViewById(R.id.listtedToSwitch);
         addAccomodation = (LinearLayout) findViewById(R.id.addAccomodation);
         progressBar = (ProgressBar) findViewById(R.id.addAccProgressBar);
-        topTv = (TextView) findViewById(R.id.textViewTop);
+        //topTv = (TextView) findViewById(R.id.textViewTop);
         buttonText = (TextView) findViewById(R.id.buttonTextView);
         listed_switch.setTextOff("False");
         listed_switch.setTextOn("True");
@@ -89,7 +120,8 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
 
         if(SharedPreferencesUtils.getInstance(this).getBoolanValue("update",false))
         {
-            topTv.setText("Update Accomodation");
+            //topTv.setText("Update Accomodation");
+            getSupportActionBar().setTitle("Update Accomodation");
             buttonText.setText("Update");
 
             final int id = getIntent().getExtras().getInt("id");
@@ -159,6 +191,85 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
 
 
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        switch(id)
+        {
+            case R.id.nav_logout:
+                SharedPreferencesUtils.getInstance(this).removeKey("token");
+                SharedPreferencesUtils.getInstance(this).removeKey("istoken");
+
+                istoken=false;
+
+
+                Intent service = new Intent(AddAccomodations.this,RefreshToken.class);
+                stopService(service);
+
+                Intent intent = new Intent(AddAccomodations.this,LogInView.class);
+                startActivity(intent);
+                finish();
+
+                break;
+
+            case R.id.nav_accomodations:
+                Intent myintent = new Intent(AddAccomodations.this,Accomodations.class);
+                startActivity(myintent);
+                finish();
+                break;
+
+            case R.id.nav_home:
+                Intent intent2 = new Intent(AddAccomodations.this,MainActivity.class);
+                startActivity(intent2);
+                finish();
+                break;
+
+
+
+
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
@@ -221,7 +332,10 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
     protected void onPause() {
         super.onPause();
         SharedPreferencesUtils.getInstance(this).setValue("update",false);
-        topTv.setText("Add Accomodation");
+        //topTv.setText("Add Accomodation");
+
+        getSupportActionBar().setTitle("Add Accomodation");
+
         buttonText.setText("Create");
 
     }
@@ -273,7 +387,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               // String item = adapterView.getItemAtPosition(i).toString();
+                // String item = adapterView.getItemAtPosition(i).toString();
 
                 selectedCountry = ids.get(i);
                 //Toast.makeText(adapterView.getContext(), "Selected: " + String.valueOf(ids.get(i)), Toast.LENGTH_LONG).show();
@@ -380,7 +494,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
         country_spinner.setSelection(0);
         region_spinner.setSelection(0);
         listed_switch.setChecked(false);
-        Intent intent = new Intent(AddAccomodationView.this,AccomodationsView.class);
+        Intent intent = new Intent(AddAccomodations.this,Accomodations.class);
         startActivity(intent);
         finish();
         Toast.makeText(this, "Accomodation Created Successfully!", Toast.LENGTH_SHORT).show();
@@ -413,7 +527,7 @@ public class AddAccomodationView extends AppCompatActivity implements AddPresent
         person_Edt_Txt.setText("");
         listed_switch.setChecked(false);
         Toast.makeText(this, "Accomodation Updated Successfully!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(AddAccomodationView.this,AccomodationsView.class);
+        Intent intent = new Intent(AddAccomodations.this,Accomodations.class);
         startActivity(intent);
         finish();
 

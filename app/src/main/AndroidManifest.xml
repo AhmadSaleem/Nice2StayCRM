@@ -31,7 +31,7 @@
         <activity
             android:name=".view.LogInView"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".view.SignUpView"
             android:theme="@style/AppTheme.NoActionBar"
@@ -47,17 +47,6 @@
             android:exported="true" />
 
         <activity
-            android:name=".view.AccomodationItemView"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
-            android:name=".view.AccomodationsView"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.AddAccomodationView"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
             android:name=".splashscreen.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -66,11 +55,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.BookingsView"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
+        <activity
+            android:name=".view.BookingsView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Accomodations"
+            android:label="@string/title_activity_accomodations"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AccomodationsItem"
+            android:label="@string/title_activity_accomodations_item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AddAccomodations"
+            android:label="@string/title_activity_add_accomodations"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
