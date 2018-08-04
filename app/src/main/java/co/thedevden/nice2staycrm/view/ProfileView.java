@@ -38,7 +38,9 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
     ProfileToPresenter presenter;
     AlertDialog.Builder builder;
     BroadcastReceiver broadcastReceiver;
+    View belowpass;
     View view,view2;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +59,10 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
         editImageview = (ImageView) findViewById(R.id.edit);
         profilePass_Edt_Txt = (EditText) findViewById(R.id.profilePassword);
         cnfrmProPass_Edt_Txt = (EditText) findViewById(R.id.cnfmprofilePassword);
-        TILcnfrmPass = (TextInputLayout) findViewById(R.id.cnfmpasswordProTIL);
-        TILPass = (TextInputLayout) findViewById(R.id.passwordProTIL);
         cnfrmTv = (TextView) findViewById(R.id.cnfmpasswordshowtv);
         passtv = (TextView) findViewById(R.id.passwordshowtv);
+        belowpass = (View) findViewById(R.id.belowpassview);
+        progressBar = (ProgressBar) findViewById(R.id.profileProgressBar);
 
         builder = new AlertDialog.Builder(this);
 
@@ -77,11 +79,11 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
                 fNamePro_Edt_Txt.requestFocus();
 
 
+                belowpass.setVisibility(View.VISIBLE);
                 cnfrmProPass_Edt_Txt.setVisibility(View.VISIBLE);
+                profilePass_Edt_Txt.setVisibility(View.VISIBLE);
                 cnfrmTv.setVisibility(View.VISIBLE);
                 passtv.setVisibility(View.VISIBLE);
-                TILcnfrmPass.setVisibility(View.VISIBLE);
-                TILPass.setVisibility(View.VISIBLE);
                 submit_profile.setVisibility(View.VISIBLE);
 
             }
@@ -160,6 +162,7 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
     @Override
     public void editProfile() {
 
+
         firstNameStr = fNamePro_Edt_Txt.getText().toString();
         lastNameStr = lNamePro_Edt_Txt.getText().toString();
         emailStr = emailPro_Edt_Txt.getText().toString();
@@ -167,18 +170,11 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
         confirmPasswordStr = cnfrmProPass_Edt_Txt.getText().toString();
         bussinessNameStr = bussPro_Edt_Txt.getText().toString();
 
-        if((TextUtils.isEmpty(passwordStr)||TextUtils.isEmpty(confirmPasswordStr)))
-        {
-            profilePass_Edt_Txt.setError("Plz Enter Password");
-            cnfrmProPass_Edt_Txt.setError("Plz Confirm");
 
-        }
-        else
-        {
 
             presenter.editUserProfile(firstNameStr,lastNameStr,emailStr,bussinessNameStr,passwordStr,confirmPasswordStr);
 
-        }
+        
 
 
 
@@ -194,15 +190,15 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
     @Override
     public void editSuccess() {
 
+        progressBar.setVisibility(View.GONE);
         fNamePro_Edt_Txt.setEnabled(false);
         lNamePro_Edt_Txt.setEnabled(false);
         bussPro_Edt_Txt.setEnabled(false);
 
         cnfrmProPass_Edt_Txt.setVisibility(View.GONE);
+        profilePass_Edt_Txt.setVisibility(View.GONE);
         cnfrmTv.setVisibility(View.GONE);
         passtv.setVisibility(View.GONE);
-        TILcnfrmPass.setVisibility(View.GONE);
-        TILPass.setVisibility(View.GONE);
         submit_profile.setVisibility(View.GONE);
 
         Toast.makeText(this, "Profile Edited Sucessfully", Toast.LENGTH_SHORT).show();
@@ -221,48 +217,64 @@ public class ProfileView extends AppCompatActivity implements ProfilePresenterTo
     @Override
     public void showError(String message) {
 
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void showErrorFirstName() {
+        progressBar.setVisibility(View.GONE);
+
         fNamePro_Edt_Txt.setError("Enter First Name");
+
     }
 
     @Override
     public void showErrorSurName() {
 
+        progressBar.setVisibility(View.GONE);
         lNamePro_Edt_Txt.setError("Enter Sur Name");
+
     }
 
     @Override
     public void showErrorBussiness() {
-
+        progressBar.setVisibility(View.GONE);
         bussPro_Edt_Txt.setError("Enter Bussiness Name");
+
     }
 
     @Override
     public void showErrorEmail() {
 
+        progressBar.setVisibility(View.GONE);
         emailPro_Edt_Txt.setError("Enter Email");
+
     }
 
     @Override
     public void showErrorPass() {
+        progressBar.setVisibility(View.GONE);
         profilePass_Edt_Txt.setError("Enter pass");
+
 
     }
 
     @Override
     public void showErrorCnfrmPass() {
 
-        cnfrmProPass_Edt_Txt.setError("Enter Confirm Passeord");
+        progressBar.setVisibility(View.GONE);
+        cnfrmProPass_Edt_Txt.setError("Enter Confirm Password");
+
+
     }
 
     @Override
     public void passMismatch() {
+        progressBar.setVisibility(View.GONE);
         profilePass_Edt_Txt.setError("Mismatch");
         cnfrmProPass_Edt_Txt.setError("Mismatch");
+
     }
 }

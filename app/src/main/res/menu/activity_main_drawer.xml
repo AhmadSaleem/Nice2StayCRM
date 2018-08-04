@@ -4,6 +4,20 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_accomodations"
+            android:icon="@drawable/ic_accomodation_24dp"
+            android:title="Accomodations" />
+        <item
+            android:id="@+id/nav_promotions"
+            android:icon="@drawable/ic_promotions_24dp"
+            android:title="Promotions" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_power_settings_new_black_24dp"

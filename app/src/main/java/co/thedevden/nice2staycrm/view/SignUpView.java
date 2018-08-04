@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,12 +51,6 @@ public class SignUpView extends AppCompatActivity implements SignUpPresenterToVi
         view2 = getLayoutInflater().inflate(R.layout.no_internet_found,null);
         setContentView(view);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-        {
-            Window w = getWindow(); // in Activity's onCreate() for instance
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
         firstname_Edt_Txt = (EditText) findViewById(R.id.editText3);
         lastname_Edt_Txt = (EditText) findViewById(R.id.editText4);
         bussName_Edt_Txt = (EditText) findViewById(R.id.editText5);
@@ -73,6 +69,8 @@ public class SignUpView extends AppCompatActivity implements SignUpPresenterToVi
         checkInternet();
         super.onResume();
     }
+
+
 
     public void checkInternet()
     {

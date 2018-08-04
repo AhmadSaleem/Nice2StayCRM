@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".view.AccomodationsItem"
+    tools:showIn="@layout/app_bar_accomodations_item">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        >
+
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/appBarLayout_Item"
+            >
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/CollapsingToolBarLayout_Item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_back"
+                app:contentScrim="?attr/colorPrimary"
+                app:title="LodgeTitle"
+                app:collapsedTitleGravity="center"
+                app:expandedTitleGravity="bottom|center_horizontal"
+                app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+
+                    ></android.support.v7.widget.Toolbar>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/accomodation_Name_Item"
+                        style="@style/Base.TextAppearance.AppCompat.Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Accomodation Name"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:id="@+id/updateAccomodationImage_Item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="16dp"
+                        android:clickable="true"
+                        android:onClick="updateAccomodation"
+                        android:src="@android:drawable/ic_menu_edit" />
+
+
+                    <TextView
+                        android:id="@+id/accomodation_Country_Item"
+                        style="@style/Base.TextAppearance.AppCompat.Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/accomodation_Name_Item"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Country: Pakistan"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/accomodation_Type_Item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/accomodation_Country_Item"
+                        android:layout_marginTop="9dp"
+                        android:gravity="center"
+                        android:text="Type: Boutique"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:background="@drawable/background_pic"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:padding="20dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+
+                <TextView
+
+                    android:text="Region: "
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:id="@+id/region_Item"/>
+
+                <TextView
+
+                    android:text="Persons Number: "
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/personsNumber_Item"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/region_Item"/>
+
+                <TextView
+
+                    android:text="Listed To: "
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listedTo_Item"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/personsNumber_Item"/>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+</android.support.constraint.ConstraintLayout>

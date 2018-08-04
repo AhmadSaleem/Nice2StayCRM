@@ -16,7 +16,7 @@ import java.util.List;
 
 import co.thedevden.nice2staycrm.R;
 import co.thedevden.nice2staycrm.model.AccomodationModel;
-import co.thedevden.nice2staycrm.view.AccomodationItemView;
+import co.thedevden.nice2staycrm.view.AccomodationsItem;
 
 public class Accomodation_Adapter extends RecyclerView.Adapter<Accomodation_Adapter.MyViewHolder>{
 
@@ -41,7 +41,7 @@ public class Accomodation_Adapter extends RecyclerView.Adapter<Accomodation_Adap
         viewHolder.mycardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,AccomodationItemView.class);
+                Intent intent = new Intent(context,AccomodationsItem.class);
                 intent.putExtra("accomo_Id",myaccomodationList.get(viewHolder.getAdapterPosition()).getId());
                 intent.putExtra("accomo_Name",myaccomodationList.get(viewHolder.getAdapterPosition()).getName());
                 intent.putExtra("accomo_Country",myaccomodationList.get(viewHolder.getAdapterPosition()).getCountry_name());

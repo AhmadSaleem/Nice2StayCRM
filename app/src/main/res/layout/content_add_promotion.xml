@@ -4,35 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AddAccomodationView">
-
-
-    <TextView
-        android:id="@+id/textViewTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Add Accomodation"
-        android:textColor="#000"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".view.AddPromotion"
+    android:fitsSystemWindows="true"
+    tools:showIn="@layout/app_bar_add_promotion">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/addDiscount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
@@ -48,35 +34,22 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/discount_type_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:text="Discount Type"
                     android:textColor="#a2a1b8"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/accomo_Name_Add"
+                <Spinner
+                    android:id="@+id/discount_Spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:background="@android:color/transparent"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                    android:ems="10"
-                    android:gravity="right"
-                    android:hint="Enter Name"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="#000"
-                    android:textSize="16dp"
-
-                    />
+                    android:autoSizeTextType="uniform" />
 
             </LinearLayout>
 
             <View
-                android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
@@ -90,64 +63,22 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/discount_number_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Type"
+                    android:text="Discount per night(only Numbers)"
                     android:textColor="#a2a1b8"
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/accomo_Type_Add"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:background="@android:color/transparent"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                    android:ems="10"
-                    android:gravity="right"
-                    android:hint="Enter Type"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="#000"
-                    android:textSize="16dp"
-
-                    />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#eeeeee" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No of Persons"
-                    android:textColor="#a2a1b8"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/noOFPersons"
+                    android:id="@+id/discount_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:gravity="right"
-                    android:hint="Enter Persons"
+                    android:hint="Enter Discount"
                     android:inputType="number"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
@@ -155,6 +86,58 @@
                     android:textSize="16dp"
 
                     />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#eeeeee" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/from_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From     "
+                    android:textColor="#a2a1b8"
+                    android:textSize="16sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:id="@+id/from_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Date"
+                    android:layout_marginLeft="50dp"
+                    android:textColor="#a2a1b8"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/from_image_button"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_date_24dp"
+
+                    />
+
 
             </LinearLayout>
 
@@ -173,18 +156,40 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/to_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Country"
+                    android:text="To         "
+                    android:textColor="#a2a1b8"
+                    android:textSize="16sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:id="@+id/to_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Date"
+                    android:layout_marginLeft="50dp"
                     android:textColor="#a2a1b8"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/to_image_button"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_date_24dp"
+
+                    />
 
             </LinearLayout>
 
@@ -203,18 +208,41 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/valid_to_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Region"
+                    android:text="Valid To"
+                    android:textColor="#a2a1b8"
+                    android:textSize="16sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:id="@+id/valid_to_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Date"
+                    android:layout_marginLeft="50dp"
                     android:textColor="#a2a1b8"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/region"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/valid_to_image_button"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_date_24dp"
+
+                    />
+
 
             </LinearLayout>
 
@@ -233,20 +261,32 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/description_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Listed To"
+                    android:text="Description"
                     android:textColor="#a2a1b8"
                     android:textSize="16sp" />
 
-                <Switch
-                    android:id="@+id/listtedToSwitch"
+                <EditText
+                    android:id="@+id/description_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:autoSizeTextType="uniform"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:hint="Enter Description"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:inputType="textPersonName"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="16dp"
 
                     />
+
+
 
             </LinearLayout>
 
@@ -258,39 +298,44 @@
                 android:layout_marginTop="10dp"
                 android:background="#eeeeee" />
 
-            <LinearLayout
-                android:id="@+id/addAccomodation"
-                android:layout_width="109dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="36dp"
-                android:layout_marginTop="20dp"
-                android:background="#000"
-                android:clickable="true"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout2">
-
-                <TextView
-                    android:id="@+id/buttonTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="0.60"
-                    android:text="Create"
-                    android:textColor="#fff" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="0.40"
-                    android:src="@drawable/ic_playlist_add_white_24dp" />
-            </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/addDiscount"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#000"
+        android:clickable="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/buttonTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="0.60"
+            android:text="Add Discount"
+            android:textColor="#fff" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:layout_weight="0.40"
+            android:src="@drawable/ic_playlist_add_white_24dp" />
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/addAccProgressBar"
